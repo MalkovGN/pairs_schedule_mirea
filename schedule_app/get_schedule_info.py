@@ -42,10 +42,26 @@ def read_file_info():
     wb = load_workbook(f'schedule_app/static/schedule_app/{file_names[0]}')
     sheets_name_list = wb.sheetnames
     group_names = []
+    group_schedule = {}
+
     for sheet_name in sheets_name_list:
         sheet = wb[f'{sheet_name}']
 
-        for column in range(6, sheet.max_column, 5):
-            group_names.append(sheet.cell(row=2, column=column).value)
+        # for column in range(6, sheet.max_column, 5):
+        #     group_name = sheet.cell(row=2, column=column).value
+        #     group_schedule[group_name] = ''
+        #     # group_names.append(sheet.cell(row=2, column=column).value)
 
-    return group_names  # Getting a group names from the one of the all sites 
+        columns_counter = 6
+        while columns_counter <= sheet.max_column:
+            subjects_lst = []
+            for row in range(2, 75):
+                if sheet.cell(row=row, column=columns_counter).value in list(group_schedule.keys()):
+                    subject_name = sheet.cell(row=row, column=columns_counter).value
+                    subjects_lst.append(subject_name)
+            group_schedule[sheet.cell(row=row, column=columns_counter).value] = subjects_lst
+            columns_counter += 5
+        return group_schedule
+
+    # return group_names  # Getting a group names from the one of the all sites
+    # group_schedule = {}
