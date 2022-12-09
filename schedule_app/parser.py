@@ -90,7 +90,7 @@ def get_schedule(filepath):
 
                         pair_info.append(subject_name)
                         pair_info.append(time_start + ':' + time_end)
-                        pair_info.append(lesson_number)
+                        pair_info.append(str(lesson_number))
                         pair_info.append(lesson_type)
                         pair_info.append(teacher)
                         pair_info.append(cabinet)
