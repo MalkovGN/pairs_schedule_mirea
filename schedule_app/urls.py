@@ -4,5 +4,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('test/', views.look_results, name='look_results'),
+    path('api/all_groups', views.GroupsScheduleView.as_view()),
+    path('api/group/<str:group_name>/', views.GroupScheduleView.as_view()),
 ]
