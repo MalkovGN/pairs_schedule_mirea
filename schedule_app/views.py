@@ -1,3 +1,4 @@
+from django.http import Http404
 from rest_framework import generics
 
 from .serializers import GroupSerializer
@@ -16,4 +17,6 @@ class GroupScheduleView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         group_name = self.kwargs['group_name']
+        if not GroupModel.objects.filter(group_name=group_name):
+            raise Http404
         return GroupModel.objects.filter(group_name=group_name)
